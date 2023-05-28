@@ -1,48 +1,30 @@
-#include <iostream>
-#include <queue>
+#include<bits/stdc++.h>
 using namespace std;
 
-queue<int> reverseQueue(queue<int>& q) {
-    if (q.empty()) {
-        return q;
-    }
-
-    int front = q.front();
-    q.pop();
-    queue<int> reversedQueue = reverseQueue(q);
-    reversedQueue.push(front);
-
-    return reversedQueue;
-}
-
-int main() {
-    queue<int> q;
-
-    q.push(1);
-    q.push(2);
-    q.push(3);
-    q.push(4);
-    q.push(5);
-
-    cout << "Original Queue: ";
-    while (!q.empty()) {
-        cout << q.front() << " ";
+queue<int> reverse(queue<int> q){
+    stack<int> s;
+    while(!q.empty()){
+        s.push(q.front());
         q.pop();
     }
-
-    q.push(1);
-    q.push(2);
-    q.push(3);
-    q.push(4);
-    q.push(5);
-
-    queue<int> reversedQueue = reverseQueue(q);
-
-    cout << "\nReversed Queue: ";
-    while (!reversedQueue.empty()) {
-        cout << reversedQueue.front() << " ";
-        reversedQueue.pop();
+    while(!s.empty()){
+        q.push(s.top());
+        s.pop();
     }
+    return q;
+}
 
+int main(){
+    queue<int> q;
+    q.push(10);
+    q.push(20);
+    q.push(30);
+    q.push(40);
+    q = reverse(q);
+    while(!q.empty()){
+        cout<< q.front() <<" ";
+        q.pop();
+    }
+    cout<< endl;
     return 0;
 }
