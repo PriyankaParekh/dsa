@@ -1,4 +1,4 @@
-#include <iostream>
+#include <bits/stdc++.h>
 
 // Doubly linked list node
 struct Node {
@@ -75,3 +75,4 @@ int main() {
 
     return 0;
 }
+
