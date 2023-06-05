@@ -1,29 +1,44 @@
-#include<bits/stdc++.h>
+// C++ program to find Maximum Product Subarray
+#include <bits/stdc++.h>
 using namespace std;
 
+/* Returns the product
+of max product subarray. */
+long long int maxSubarrayProduct(int arr[], int n)
+{
+    long long ans = INT_MIN;
+    long long product = 1;
+
+    for (int i = 0; i < n; i++)
+    {
+        product *= arr[i];
+        ans = max(ans, product);
+        if (arr[i] == 0)
+        {
+            product = 1;
+        }
+    }
+
+    product = 1;
+
+    for (int i = n - 1; i >= 0; i--)
+    {
+        product *= arr[i];
+        ans = max(ans, product);
+        if (arr[i] == 0)
+        {
+            product = 1;
+        }
+    }
+    return ans;
+}
+
+// Driver code
 int main()
 {
-    int arr[100], mul=0, max = -3267, s = 0;
+    int arr[] = {1, -2, -3, 0, 7, -8, -2};
     int n = sizeof(arr) / sizeof(arr[0]);
-    cout << "Please enter the lengh of array: ";
-    cin >> n;
-    cout << "Please enter the array elements: ";
-    for (int i = 1; i < n + 1; i++)
-    {
-        cin >> arr[i];
-    }
-    for (int i = 1; i < n + 1; i++)
-    {
-        int mul = 1;
-        for (int j = i; j < n+1; j++){
-        mul = mul * arr[j];
-        if (max < mul)
-        {
-            max = mul;
-        }
-        
-        }
-    }
-    cout << "Max Product Subarray sum is: " << max;
+    cout << "Maximum Sub array product is "
+         << maxSubarrayProduct(arr, n);
     return 0;
 }

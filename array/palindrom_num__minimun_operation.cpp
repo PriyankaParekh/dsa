@@ -1,43 +1,55 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
-
-int palindrom(int arr, int n)
+   
+    bool isPalindrome(int num)
 {
-    int temp, r, sum = 0;
-        temp = arr;
-        while (arr > 0)
-        {
-            r = arr % 10;
-            sum = (sum * 10) + r;
-            arr = arr / 10;
-        }
-        if (temp == sum)
-            return true;
-        else
-            return false;
+    int temp = num;
+    int reversed = 0;
+
+    while (temp)
+    {
+        int rem = temp % 10;
+        reversed = (reversed * 10) + rem;
+        temp = temp / 10;
     }
+
+    return num == reversed;
+}
+
+int PalinArray(int arr[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        if (!isPalindrome(arr[i]))
+        {
+                return 0;
+        }
+    }
+
+    return 1;
+}
 
 int main()
 {
-    int n, arr[20],f=0;
-    bool palin[20];
-    cout << "Please Enter the length of array: ";
+    int n, arr[20];
+    cout << "Please enter the length of the array: ";
     cin >> n;
-    cout << "Please Enter the array elements: ";
-    for (int i = 1; i < n + 1; i++)
+    cout << "Please enter the array elements: ";
+
+    for (int i = 0; i < n; i++)
     {
         cin >> arr[i];
-        palin[i]= palindrom(arr[i], n);
-        if(palin[i]==0){
-            f=f+1;
-        }
-    
     }
-    if(f>=1){
-        cout<<"0";
-    }else{
-        cout<<"1";
+
+    if (PalinArray(arr, n))
+    {
+        cout << "1";
+    }
+    else
+    {
+        cout << "0";
     }
 
     return 0;
 }
+

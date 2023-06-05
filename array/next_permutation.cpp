@@ -1,32 +1,45 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
 using namespace std;
 
-int main()
-{
-    int array[4];
-    cout << "enter the number for knowing next permutation: ";
-    for (int i = 0; i < 3; i++)
-    {
-        cin >> array[i];
-    }
-    int arr[4] = {1, 2, 3};
-    sort(arr, arr + 3);
-
-    cout << arr[0] << " " << arr[1] << " " << arr[2] << endl;
-    while (next_permutation(arr, arr + 3))
-    {
-        cout << arr[0] << " " << arr[1] << " " << arr[2];
-        cout << endl;
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int index = -1, n = nums.size();
         
+        // Find the first decreasing element from the right
+        for (int i = n - 2; i >= 0; i--) {
+            if (nums[i] < nums[i + 1]) {
+                index = i;
+                break;
+            }
+        }
+        
+        // Find the next greater element from the right side
+        for (int i = n - 1; i > index && index != -1; i--) {
+            if (nums[i] > nums[index]) {
+                swap(nums[i], nums[index]);
+                break;
+            }
+        } 
+        
+        // Reverse the elements after index+1
+        reverse(nums.begin() + index + 1, nums.end());
     }
-    if (arr[0] == array[0] && arr[1] != array[1] && arr[2] != array[2])
-        {
-            cout << arr[0] << " " << arr[1] << " " << arr[2]<<endl;
-        }else if(arr[0] == array[1] && arr[1] == array[2] && arr[2] == array[0]){
-            cout << arr[1] << " " << arr[2] << " " << arr[0]<<endl;
-        }
-        else if(arr[0] == array[2] && arr[1] == array[0] && arr[2] == array[1]){
-            cout << arr[2] << " " << arr[0] << " " << arr[1]<<endl;
-        }
+};
+
+int main() {
+    // Example usage
+    vector<int> nums = {2,3,1};
+    Solution solution;
+    solution.nextPermutation(nums);
+    
+    // Print the modified permutation
+    for (int num : nums) {
+        cout << num << " ";
+    }
+    
     return 0;
 }
